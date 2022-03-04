@@ -1,7 +1,12 @@
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
-let OrderForm = (props) => {
-  const { dishTypeValue, handleSubmit, pristine, reset, submitting } = props;
+let OrderForm = ({
+  dishTypeValue,
+  handleSubmit,
+  pristine,
+  reset,
+  submitting,
+}) => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -37,16 +42,33 @@ let OrderForm = (props) => {
           </Field>
         </div>
       </div>
+      {dishTypeValue === '' && <div></div>}
       {dishTypeValue === 'Pizza' && (
         <div>
           <div>
-            <label>Preparation Time</label>
+            <label>Customize Your Pizza</label>
             <div>
+              <label>Diameter(Between 20 to 55 cm)</label>
               <Field
-                name='preparationTime'
+                name='diameter'
                 component='input'
-                type='text'
-                placeholder='Preparation Time'
+                type='number'
+                step='0.1'
+                min='20'
+                max='55'
+                placeholder='Diameter'
+              />
+            </div>
+            <div>
+              <label>Number of Slices(Up to 16 Slices)</label>
+              <Field
+                name='numOfSlices'
+                component='input'
+                type='number'
+                step='2'
+                min='0'
+                max='16'
+                placeholder='Number of Slices'
               />
             </div>
           </div>
@@ -55,13 +77,16 @@ let OrderForm = (props) => {
       {dishTypeValue === 'Soup' && (
         <div>
           <div>
-            <label>Soup Time</label>
+            <label>Customize Your Soup</label>
             <div>
+              <label>Spiciness Scale(Between 1 to 10)</label>
               <Field
-                name='preparationTime'
+                name='spiciness'
                 component='input'
-                type='text'
-                placeholder='Preparation Time'
+                type='number'
+                min='1'
+                max='10'
+                placeholder='Spiciness'
               />
             </div>
           </div>
@@ -70,34 +95,21 @@ let OrderForm = (props) => {
       {dishTypeValue === 'Sandwich' && (
         <div>
           <div>
-            <label>SAndwich Time</label>
+            <label>Customize Your Sanwich</label>
             <div>
+              <label>Number of Slices of Bread (Between 1 to 4)</label>
               <Field
-                name='preparationTime'
+                name='breadSlices'
                 component='input'
-                type='text'
-                placeholder='Preparation Time'
+                type='number'
+                min='1'
+                max='4'
+                placeholder='Bread Slices'
               />
             </div>
           </div>
         </div>
       )}
-      {/* {dishTypeValue && (
-        <div>
-          {' '}
-          <div>
-            <label>Preparation Time</label>
-            <div>
-              <Field
-                name='preparationTime'
-                component='input'
-                type='text'
-                placeholder='Preparation Time'
-              />
-            </div>
-          </div>
-        </div>
-      )} */}
       <div>
         <button type='submit' disabled={pristine || submitting}>
           Submit
@@ -110,15 +122,13 @@ let OrderForm = (props) => {
   );
 };
 
-// The order of the decoration does not matter.
-
 // Decorate with redux-form
 OrderForm = reduxForm({
-  form: 'selectingFormValues', // a unique identifier for this form
+  form: 'selectingFormValues',
 })(OrderForm);
 
 // Decorate with connect to read form values
-const selector = formValueSelector('selectingFormValues'); // <-- same as form name
+const selector = formValueSelector('selectingFormValues');
 OrderForm = connect((state) => {
   const dishTypeValue = selector(state, 'dishType');
 
