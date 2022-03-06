@@ -16,7 +16,7 @@ const submitToServer = async (data) => {
     console.error(error);
   }
 };
-const submit = (values) => {
+const submit = (values, reset) => {
   //format the data
   const hours = parseInt(values.hour).toLocaleString('en-US', {
     minimumIntegerDigits: 2,
@@ -47,6 +47,10 @@ const submit = (values) => {
   values = { ...others, ...{ preparation_time } };
 
   // submit to server
-  submitToServer(values).then((data) => console.log(data));
+  submitToServer(values).then((values) =>
+    window.alert(
+      `Your order submitted succesfully!\n\n${JSON.stringify(values, null, 2)}`
+    )
+  );
 };
 export default submit;

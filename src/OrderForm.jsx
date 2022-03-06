@@ -6,7 +6,7 @@ import submit from './submit';
 
 let OrderForm = ({ typeValue, handleSubmit, pristine, reset, submitting }) => {
   return (
-    <div class='min-h-screen bg-gray-100 flex flex-col justify-center py-12 px-6 lg:px-8'>
+    <div className='min-h-screen bg-gray-100 flex flex-col justify-center py-12 px-6 lg:px-8'>
       <div className='sm:mx-auto sm:w-full sm:max-w-md'>
         <img
           className='mx-auto h-12 w-auto'
@@ -34,7 +34,7 @@ let OrderForm = ({ typeValue, handleSubmit, pristine, reset, submitting }) => {
                 />
               </div>
             </div>
-            <div className='flex flex-row justify-center items-center'>
+            <div className='flex flex-row justify-center items-center pb-6'>
               <label className='block text-sm font-medium text-gray-800 pt-4'>
                 Preparation Time
               </label>
