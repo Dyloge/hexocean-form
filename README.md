@@ -1,4 +1,10 @@
-# Getting Started with Create React App
+# HexOcean Form
+
+## Live preview
+
+Here is the [Demo] of the project.
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and [redux-form](https://redux-form.com/8.3.0/). Also, styled with [tailwind.css](https://tailwindcss.com/) and specifically, [forms plugin](https://github.com/tailwindlabs/tailwindcss-forms).
 
