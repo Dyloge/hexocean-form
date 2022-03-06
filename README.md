@@ -2,7 +2,7 @@
 
 ## Live preview
 
-Here is the [Demo] of the project.
+Here is the [Demo](https://hexocean-form.netlify.app/) of the project.
 
 ## Getting Started with Create React App
 
