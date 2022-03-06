@@ -2,49 +2,11 @@ import { Input, Select } from './fields';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { required } from './validation';
-
-const submitToServer = async (data) => {
-  try {
-    let response = await fetch(
-      'https://frosty-wood-6558.getsandbox.com:443/dishes',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      }
-    );
-    let responseJson = await response.json();
-    return responseJson;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-const submit = (values) => {
-  const hours = parseInt(values.hour).toLocaleString('en-US', {
-    minimumIntegerDigits: 2,
-    useGrouping: false,
-  });
-  const minutes = parseInt(values.hour).toLocaleString('en-US', {
-    minimumIntegerDigits: 2,
-    useGrouping: false,
-  });
-  const seconds = parseInt(values.hour).toLocaleString('en-US', {
-    minimumIntegerDigits: 2,
-    useGrouping: false,
-  });
-  const preparation_time = `${hours}:${minutes}:${seconds}`;
-  let { hour, minute, second, ...others } = values;
-  values = { ...others, ...{ preparation_time } };
-  submitToServer(values).then((data) => console.log(data));
-  console.log(values);
-};
+import submit from './submit';
 
 let OrderForm = ({ typeValue, handleSubmit, pristine, reset, submitting }) => {
   return (
-    <form onSubmit={handleSubmit(submit)}>
+    <form onSubmit={handleSubmit}>
       <div>
         <Field
           label='Dish Name'
@@ -158,7 +120,7 @@ let OrderForm = ({ typeValue, handleSubmit, pristine, reset, submitting }) => {
                 component={Input}
                 validate={[required]}
                 label='Number of Slices of Bread (Between 1 to 4)'
-                name='bread_slices'
+                name='slices_of_bread'
                 type='number'
                 min='1'
                 max='4'
@@ -183,6 +145,7 @@ let OrderForm = ({ typeValue, handleSubmit, pristine, reset, submitting }) => {
 // Decorate with redux-form
 OrderForm = reduxForm({
   form: 'order',
+  onSubmit: submit,
 })(OrderForm);
 
 // Decorate with connect to read form values
