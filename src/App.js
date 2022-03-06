@@ -4,9 +4,6 @@ import store from './store';
 import OrderForm from './OrderForm';
 
 export default class App extends Component {
-  submit = (values) => {
-    console.log(values);
-  };
   render() {
     return (
       <Provider store={store}>
